@@ -1464,10 +1464,14 @@ rule MapNamedSam:
         mappedsam="{data}.mapped.bam.bed12.multi_exon.fasta.named.mm2.sam",        
     params:
         grid_opts=config["grid_large"]
+        map_type="ava-pb"
     resources:
         load=12
     shell:"""
-minimap2 {input.asm} {input.fa} -t 12 -a > {output.mappedsam}
+#minimap2 {input.asm} {input.fa} -t 12 -a > {output.mappedsam}
+
+minimap2 -ax {params.map_type} -K 100 -m 50 -F 500 -m 200 --dual=yes -t {resource.load} {input.asm} {input.fa} > {output.mappedsam} 
+
 """
 
 rule MappedSamIdentity:
