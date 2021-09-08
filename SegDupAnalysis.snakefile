@@ -1470,7 +1470,7 @@ rule MapNamedSam:
     shell:"""
 #minimap2 {input.asm} {input.fa} -t 12 -a > {output.mappedsam}
 
-minimap2 -ax {params.map_type} -K 100 -m 50 -F 500 -m 200 --dual=yes -t {resource.load} {input.asm} {input.fa} > {output.mappedsam} 
+minimap2 -ax {params.map_type} -K 100 -m 50 -F 500 -m 200 --dual=yes -t {resources.load} {input.asm} {input.fa} > {output.mappedsam} 
 
 """
 
